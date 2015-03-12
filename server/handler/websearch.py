@@ -4,7 +4,7 @@
 import tornado.web
 import json
 
-from handler.model import *
+from model import Keyword, KeywordType, SearchResult
 
 from pprint import pprint
 

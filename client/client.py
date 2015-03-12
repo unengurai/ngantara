@@ -6,32 +6,17 @@ import urllib.request as urllib2
 import json
 from pprint import pprint
 
+import toserver
 
-class PostGet:
-    url = 'http://127.0.0.1:6969/ws/'
-    uagent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
-    
-    
-    def Post(self, post_data, url=self.url, uagent=self.uagent):
-        headers = { 'User-Agent' : uagent }
-        data = urllib.urlencode(post_data)
-        req = urllib2.Request(url, data, headers)
-        return urllib2.urlopen(req)
-    
-    
-    def Get(self, url=self.url):
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req)
-        mesg = response.read()
-        return mesg.decode('ascii')
-        
-        
-##- GET-----------------------------------------------------------------
-#data['kwid'] = ''
+
+##- GET -----------------------------------------------------------------
 data = { 'kw' : '',
          'kwid' : '' }
 
-mesg = PostGet.Get()
+ts = toserver.PostGet()
+
+url = 'http://127.0.0.1:6969/ws/'
+mesg = ts.get(url)
 jmesg = json.loads(mesg)
 
 data = jmesg

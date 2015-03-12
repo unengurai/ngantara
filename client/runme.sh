@@ -11,5 +11,5 @@ SPATH=`dirname $(readlink -f $0)`
 
 echo "server started..."
 echo $PYTHONPATH
-python3 server.py
+python3 client.py
 
