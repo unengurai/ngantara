@@ -6,16 +6,16 @@ import urllib.request as urllib2
 import json
 from pprint import pprint
 
-import toserver
+from handler import toserver
 
 
 ##- GET -----------------------------------------------------------------
-data = { 'kw' : '',
-         'kwid' : '' }
+data = {'kw': '',
+        'kwid': ''}
 
 ts = toserver.PostGet()
 
-url = 'http://127.0.0.1:6969/ws/'
+url = "http://127.0.0.1:6969/gk/"
 mesg = ts.get(url)
 jmesg = json.loads(mesg)
 

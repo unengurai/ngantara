@@ -7,13 +7,15 @@ import tornado.web
 
 from tornado import autoreload
 
-from websearch import GetKw
+from handler import websearch
 
 
 app = tornado.web.Application([
-                        (r"/ws/", GetKw)
-                        ])
-
+    (r"/gk/", websearch.GetKw),
+    (r"/sr/", websearch.SearchResult),
+    (r"/kt/", websearch.KwType),
+    (r"/k/", websearch.Kw)
+])
 
 if __name__ == "__main__":
     app.listen(6969)
@@ -21,4 +23,3 @@ if __name__ == "__main__":
     IoLoop = tornado.ioloop.IOLoop.instance()
     autoreload.start(IoLoop)
     IoLoop.start()
-
