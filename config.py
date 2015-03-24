@@ -23,8 +23,8 @@ dbconfig = {
     },
     'postgre': {
         'host': '127.0.0.1',
-        'user': '',
-        'password': '',
-        'db_name': '',
+        'user': 'ton',
+        'password': 'tono123',
+        'db_name': 'ngantara',
     }
 }

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 import sys
-from model import *
+from handler import model
 
 
-#create_model()
+model.create_model()
 try:
-    KwType = KeywordType(kwtype='dummy', app='dummy app', note='dummy')
+    KwType = model.KeywordType(kwtype='dummy', app='dummy app', note='dummy')
     KwType.save()
 except:
     print("KwType err : " + str(sys.exc_info()))
@@ -14,8 +14,8 @@ except:
 
 
 try:
-    KwType = KeywordType.get(KeywordType.kwtype == 'dummy')
-    Kw = Keyword(kwtype=KwType.ktid, kw='keyword_3')
+    KwType = model.KeywordType.get(model.KeywordType.kwtype == 'dummy')
+    Kw = model.Keyword(kwtype_id=KwType.id, kw='keyword_3')
     Kw.save()
 except:
     print("Kw err : " + str(sys.exc_info()))

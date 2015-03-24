@@ -5,9 +5,16 @@ import peewee
 
 from config import dbconfig
 
-db = dbconfig['sqlite']['db']
-database = peewee.SqliteDatabase(db)
+##- amun makai sqlite.
+#db = dbconfig['sqlite']['db']
+#database = peewee.SqliteDatabase(db)
 
+##- amun makai pgsql
+db = dbconfig['postgre']['db_name']
+db_uname = dbconfig['postgre']['user']
+db_passwd =  dbconfig['postgre']['password']
+database = peewee.PostgresqlDatabase\
+           (db, user=db_uname, password=db_passwd)
 
 class BaseModel(peewee.Model):
     """Base model"""
@@ -17,35 +24,36 @@ class BaseModel(peewee.Model):
 
 
 class KeywordType(BaseModel):
-    ktid = peewee.PrimaryKeyField()
+    id = peewee.PrimaryKeyField()
     kwtype = peewee.CharField(max_length=128, unique=True)
     app = peewee.CharField(max_length=128)
     note = peewee.CharField(max_length=128)
 
 
 class Keyword(BaseModel):
-    kwid = peewee.PrimaryKeyField()
+    id = peewee.PrimaryKeyField()
     kw = peewee.CharField(max_length=128, unique=True)
-    kwtype = peewee.IntegerField()
-    ##- checked maksud ni pakai pananda: 1=luput, 2=haut na alap, 3=hu'an na alap
+    kwtype_id = peewee.IntegerField()
+    ##- checked maksud ni pakai pananda:
+    ##  1=luput, 2=haut na alap, 3=hu'an na alap
     checked = peewee.CharField(max_length=2, default=3)
     cdate = peewee.DateField(default=datetime.date.today)
 
 
 class SearchResult(BaseModel):
-    srid = peewee.PrimaryKeyField()
-    url = peewee.CharField(max_length=128, unique=True)
-    kw = peewee.IntegerField()
-    cdate = peewee.DateField()
+    id = peewee.PrimaryKeyField()
+    url = peewee.CharField(max_length=128)
+    kw_id = peewee.IntegerField()
+    cdate = peewee.DateField(default=datetime.date.today)
 
 
 class AuthKey(BaseModel):
-    akid = peewee.PrimaryKeyField()
+    id = peewee.PrimaryKeyField()
     key = peewee.CharField(max_length=16, unique=True)
     active = peewee.BooleanField()
 
 
-all_model = [KeywordType, Keyword, SearchResult]
+all_model = [KeywordType, Keyword, SearchResult, AuthKey]
 
 
 def create_model():
